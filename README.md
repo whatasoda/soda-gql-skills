@@ -17,13 +17,23 @@ bun add @soda-gql/core
 bun add -D @soda-gql/tools @soda-gql/config
 ```
 
-2. **Enable the marketplace plugin in Claude Code:**
+2. **Install the Claude Code plugin:**
 
-The plugin is distributed as part of the soda-gql repository. Claude Code will automatically detect the `.claude-plugin/marketplace.json` file and make the skills available when you work in a soda-gql project.
+```bash
+claude plugin marketplace add soda-gql-skills --source github:whatasoda/soda-gql-skills
+claude plugin install soda-gql-skills@soda-gql-skills
+```
+
+Restart your Claude Code session to activate the skills.
 
 ### For Monorepo Contributors
 
-The plugin is already available when working in the soda-gql monorepo. All skills work out of the box via workspace package links.
+```bash
+claude plugin marketplace add soda-gql-skills --source github:whatasoda/soda-gql-skills
+claude plugin install soda-gql-skills@soda-gql-skills
+```
+
+All skills work out of the box via workspace package links after installation.
 
 ## Prerequisites
 
@@ -209,14 +219,14 @@ const result = Bun.spawnSync({
 ### Skills don't appear in Claude Code
 
 **Possible causes:**
-1. Marketplace plugin not detected
+1. Marketplace plugin not installed
 2. SKILL.md files have invalid YAML frontmatter
 3. Plugin directory structure incorrect
 
 **Solutions:**
-- Verify `.claude-plugin/marketplace.json` exists at repo root
-- Validate YAML frontmatter: `python3 -m json.tool < .claude-plugin/marketplace.json`
-- Check plugin structure: `ls -R claude-code-plugin/skills/`
+- Verify the marketplace is registered: `claude plugin marketplace list` should show `soda-gql-skills`
+- Verify plugin is installed: `claude plugin list` should show `soda-gql-skills@soda-gql-skills`
+- Re-install if needed: `claude plugin marketplace add soda-gql-skills --source github:whatasoda/soda-gql-skills && claude plugin install soda-gql-skills@soda-gql-skills`
 - Restart Claude Code to refresh plugin detection
 
 ### Type errors after code generation

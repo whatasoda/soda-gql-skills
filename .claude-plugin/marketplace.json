@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "soda-gql-skills",
-      "source": ".",
+      "source": "./",
       "description": "Claude Code skills for soda-gql GraphQL development",
       "version": "0.2.0"
     }
